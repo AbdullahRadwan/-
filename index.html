@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>متجر الكهرباء</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+    direction: rtl;
+    background: url('logo.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #e0e0e0;
+    min-height: 100vh;
+}
+
+/* Overlay */
+body::before {
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+    z-index:-1;
+}
+
+a {text-decoration:none;color:inherit}
+
+/* ===== Navbar ===== */
+nav {
+    background:rgba(31,31,31,0.9);
+    padding:10px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+nav .logo {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:24px;
+    font-weight:bold;
+}
+nav .logo img {width:40px;height:40px}
+nav ul {
+    list-style:none;
+    display:flex;
+    gap:20px;
+}
+nav ul li {transition:.3s}
+nav ul li:hover {transform:scale(1.1)}
+
+/* ===== Header ===== */
+header {
+    text-align:center;
+    padding:50px 20px;
+    background:rgba(0,0,0,0.6);
+    border-radius:0 0 20px 20px;
+}
+header h1 {font-size:36px}
+header p {color:#ccc;margin-top:10px}
+
+/* ===== Categories ===== */
+.categories {
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:25px 0;
+    flex-wrap:wrap;
+}
+.categories button {
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    background:#333;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+.categories button.active,
+.categories button:hover {
+    background:#0d6efd;
+}
+
+/* ===== Products ===== */
+.products-container {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+    padding:20px 40px;
+}
+
+.product-card {
+    background:rgba(31,31,31,0.9);
+    border-radius:15px;
+    overflow:hidden;
+    text-align:center;
+    position:relative;
+    box-shadow:0 8px 20px rgba(0,0,0,.6);
+    animation:fadeUp .8s ease both;
+    transition:.4s;
+}
+.product-card:hover {
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 15px 30px rgba(0,0,0,.9);
+}
+
+/* Animation */
+@keyframes fadeUp {
+    from {opacity:0; transform:translateY(40px)}
+    to {opacity:1; transform:translateY(0)}
+}
+
+.product-card img {
+    width:100%;
+    height:240px;
+    object-fit:contain;
+}
+
+/* Discount */
+.discount-badge {
+    position:absolute;
+    top:10px;
+    right:10px;
+    background:#ff3860;
+    padding:5px 10px;
+    border-radius:6px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+/* Info */
+.product-info {padding:15px}
+.product-info h3 {
+    color:#0d6efd;
+    margin-bottom:5px;
+}
+.product-info p {
+    font-size:14px;
+    color:#ddd;
+    margin-bottom:10px;
+}
+
+/* Price */
+.price-container {
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    align-items:center;
+}
+.old {
+    text-decoration:line-through;
+    color:#aaa;
+    font-size:14px;
+}
+.new {
+    color:#28a745;
+    font-size:18px;
+    font-weight:bold;
+}
+
+/* ===== About ===== */
+.about-section {
+    display:flex;
+    align-items:center;
+    gap:25px;
+    background:rgba(0,0,0,0.6);
+    margin:30px 20px;
+    padding:30px;
+    border-radius:15px;
+}
+.about-section img {
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    border:3px solid #0d6efd;
+    object-fit:cover;
+}
+.about-text h2 {color:#0d6efd;margin-bottom:10px}
+
+/* ===== Contact ===== */
+.contact-section {
+    text-align:center;
+    background:rgba(0,0,0,0.6);
+    margin:30px 20px;
+    padding:30px;
+    border-radius:15px;
+}
+.contact-icons a {
+    font-size:30px;
+    margin:0 15px;
+    transition:.3s;
+}
+.contact-icons a:hover {
+    color:#0d6efd;
+    transform:scale(1.2);
+}
+
+/* ===== Footer ===== */
+footer {
+    background:#1f1f1f;
+    text-align:center;
+    padding:20px;
+    margin-top:30px;
+}
+
+/* ===== Responsive ===== */
+@media(max-width:700px){
+    .about-section{flex-direction:column;text-align:center}
+    nav ul{flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">
+        <img src="logo.jpg">
+        مركز باور
+    </div>
+    <ul>
+        <li><a href="#products">المنتجات</a></li>
+        <li><a href="#about">حول</a></li>
+        <li><a href="#contact">تواصل معنا</a></li>
+    </ul>
+</nav>
+
+<header>
+    <h1>أفضل المنتجات الكهربائية</h1>
+    <p>جودة عالية – أسعار تنافسية – صيانة معتمدة</p>
+</header>
+
+<div class="categories">
+    <button class="active" onclick="filterCategory('all',this)">الكل</button>
+    <button onclick="filterCategory('fan',this)">مراوح</button>
+    <button onclick="filterCategory('washing',this)">غسالات</button>
+    <button onclick="filterCategory('microwave',this)">ميكروويف</button>
+</div>
+
+<div class="products-container" id="products"></div>
+
+<div class="about-section" id="about">
+    <img src="sss.jpg">
+    <div class="about-text">
+        <h2>مسؤول الصيانة</h2>
+        <p>
+            مهندس / هيثم  
+            مسؤول عن صيانة جميع الأجهزة بالمركز وضمان أفضل جودة خدمة
+        </p>
+    </div>
+</div>
+
+<div class="contact-section" id="contact">
+    <h2>تواصل معنا</h2>
+    <div class="contact-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
+</div>
+
+<footer>
+    جميع الحقوق محفوظة © 2026
+</footer>
+
+<script>
+const products = [
+ {name:'مروحة كهربائية',price:500,discount:10,category:'fan',image:'fff.jpg',desc:'قوية وهادئة'},
+ {name:'مروحة سقف',price:1200,discount:15,category:'fan',image:'w3.png',desc:'تصميم عصري'},
+ {name:'غسالة صغيرة',price:2500,discount:5,category:'washing',image:'w4.png',desc:'موفرة للمساحة'},
+ {name:'غسالة أوتوماتيك',price:4000,discount:20,category:'washing',image:'w5.png',desc:'أداء عالي'},
+ {name:'ميكروويف',price:1800,discount:0,category:'microwave',image:'w6.png',desc:'سريع وآمن'},
+ {name:'ميكروويف صغير',price:1200,discount:10,category:'microwave',image:'w7.png',desc:'مثالي للمطابخ الصغيرة'}
+];
+
+function displayProducts(list){
+ const c=document.getElementById('products');
+ c.innerHTML='';
+ list.forEach(p=>{
+  const newPrice=p.discount?(p.price-p.price*p.discount/100).toFixed(0):p.price;
+  c.innerHTML+=`
+   <div class="product-card">
+    ${p.discount?`<div class="discount-badge">-${p.discount}%</div>`:''}
+    <img src="${p.image}">
+    <div class="product-info">
+     <h3>${p.name}</h3>
+     <p>${p.desc}</p>
+     <div class="price-container">
+      ${p.discount?`<span class="old">${p.price} LE</span>`:''}
+      <span class="new">${newPrice} LE</span>
+     </div>
+    </div>
+   </div>`;
+ });
+}
+
+function filterCategory(cat,btn){
+ document.querySelectorAll('.categories button').forEach(b=>b.classList.remove('active'));
+ btn.classList.add('active');
+ displayProducts(cat==='all'?products:products.filter(p=>p.category===cat));
+}
+
+displayProducts(products);
+</script>
+
+</body>
+</html>
